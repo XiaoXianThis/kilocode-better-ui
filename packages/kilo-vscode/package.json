@@ -479,22 +479,22 @@
         {
           "command": "kilo-code.new.sidebarTitle.agentManagerOpen",
           "group": "navigation@2",
-          "when": "view == kilo-code.SidebarProvider"
+          "when": "false"
         },
         {
           "command": "kilo-code.new.sidebarTitle.kiloClawOpen",
           "group": "navigation@3",
-          "when": "view == kilo-code.SidebarProvider"
+          "when": "false"
         },
         {
           "command": "kilo-code.new.sidebarTitle.marketplaceButtonClicked",
           "group": "navigation@4",
-          "when": "view == kilo-code.SidebarProvider"
+          "when": "false"
         },
         {
           "command": "kilo-code.new.sidebarTitle.profileButtonClicked",
           "group": "navigation@5",
-          "when": "view == kilo-code.SidebarProvider"
+          "when": "false"
         },
         {
           "command": "kilo-code.new.sidebarTitle.settingsButtonClicked",
@@ -951,6 +951,11 @@
           "minimum": 10,
           "maximum": 24,
           "description": "Font size in pixels for the Kilo Code webview UI."
+        },
+        "kilo-code.new.customCssPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to a CSS file injected into the Kilo Code webview UI to customize its appearance (border radius, spacing, hide elements, etc.). Use an absolute path or a path relative to the workspace root. Your CSS is appended last so it overrides the default styles. Leave empty to disable."
         },
         "kilo-code.new.browserAutomation.enabled": {
           "type": "boolean",

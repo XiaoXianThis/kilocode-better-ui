@@ -106,7 +106,13 @@ export function createAutoScroll(options: AutoScrollOptions) {
     if (!canScroll(scroll)) return
 
     if (distance < threshold()) {
-      if (store.userScrolled) setStore("userScrolled", false)
+      // Resume auto-follow when the view returns to the bottom band, but not
+      // while the user is actively wheeling up: a slow wheel-up sits within the
+      // threshold each tick, and resuming here would let the next resize snap
+      // the view back down. Require a true bottom (<2px) during that grace.
+      if (store.userScrolled && (!userActivity.isRecent() || distance < 2)) {
+        setStore("userScrolled", false)
+      }
       return
     }
 

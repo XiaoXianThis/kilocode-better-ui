@@ -23,6 +23,10 @@ export const createUserActivity = (options: UserActivityOptions) => {
 
   const handleWheel = (event: WheelEvent) => {
     if (event.deltaY >= 0) return
+    // Record upward-wheel intent so stick-to-bottom yields to the wheel. A slow
+    // wheel-up lands the view near the bottom on each tick; without this the
+    // following scroll event would treat it as "at bottom" and resume auto-follow.
+    time = performance.now()
     options.onWheelUp()
   }
 

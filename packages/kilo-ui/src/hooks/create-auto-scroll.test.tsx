@@ -77,12 +77,12 @@ globalThis.WheelEvent = FakeWheelEvent as unknown as typeof WheelEvent
 
 const { createAutoScroll } = await import("./create-auto-scroll")
 
-function setup(options?: { interacted?: () => void }) {
+function setup(options?: { interacted?: () => void; working?: () => boolean }) {
   const el = new FakeElement()
   const root = createRoot((dispose) => ({
     dispose,
     scroll: createAutoScroll({
-      working: () => false,
+      working: options?.working ?? (() => false),
       onUserInteracted: options?.interacted,
     }),
   }))
@@ -181,6 +181,27 @@ describe("createAutoScroll non-scrollable layouts", () => {
 
     expect(ctx.scroll.userScrolled()).toBe(false)
     expect(ctx.el.scrollTop).toBe(300)
+    ctx.dispose()
+  })
+
+  test("a slow upward wheel near the bottom pauses and is not re-snapped while working", () => {
+    const ctx = setup({ working: () => true })
+    ctx.el.scrollHeight = 300
+    ctx.el.clientHeight = 100
+    ctx.el.scrollTop = 200
+
+    // Slow wheel-up only moves a few pixels, leaving the view inside the 10px
+    // bottom threshold (distance from bottom = 5).
+    ctx.el.fire("wheel", new FakeWheelEvent(-5, ctx.el) as unknown as Event)
+    ctx.el.scrollTop = 195
+    ctx.scroll.handleScroll()
+
+    expect(ctx.scroll.userScrolled()).toBe(true)
+
+    // A streaming resize must not yank the view back to the bottom.
+    ctx.resize()
+    expect(ctx.scroll.userScrolled()).toBe(true)
+    expect(ctx.el.scrollTop).toBe(195)
     ctx.dispose()
   })
 })

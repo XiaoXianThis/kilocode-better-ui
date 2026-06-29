@@ -1,4 +1,6 @@
 import * as crypto from "crypto"
+import * as fs from "fs"
+import * as path from "path"
 import * as vscode from "vscode"
 import { buildCspString } from "./webview-html-utils"
 
@@ -16,6 +18,33 @@ function clamp(size: number) {
 export function getWebviewFontSize(): number {
   const raw = vscode.workspace.getConfiguration("kilo-code.new").get<number>("fontSize", 13)
   return clamp(raw)
+}
+
+// Resolve the configured custom CSS file path. Relative paths are resolved
+// against the first workspace folder so project-local stylesheets work.
+export function getCustomCssPath(): string | undefined {
+  const raw = vscode.workspace.getConfiguration("kilo-code.new").get<string>("customCssPath", "").trim()
+  if (!raw) return undefined
+  if (path.isAbsolute(raw)) return raw
+  const root = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath
+  return root ? path.join(root, raw) : undefined
+}
+
+// Read the user's custom stylesheet. Returns an empty string on any failure so
+// a missing or unreadable file never breaks the webview.
+export function readCustomCss(): string {
+  const file = getCustomCssPath()
+  if (!file) return ""
+  const css = (() => {
+    try {
+      return fs.readFileSync(file, "utf-8")
+    } catch (err) {
+      console.error(`[Kilo New] failed to read custom CSS at ${file}`, err)
+      return ""
+    }
+  })()
+  if (!css.trim()) return ""
+  return `\n    /* kilo-code.new.customCssPath */\n    ${css}`
 }
 
 function fontStyle(): string {
@@ -77,7 +106,7 @@ export function buildWebviewHtml(
     }
     #root {
       height: 100%;
-    }${opts.extraStyles ? `\n    ${opts.extraStyles}` : ""}
+    }${opts.extraStyles ? `\n    ${opts.extraStyles}` : ""}${readCustomCss()}
   </style>
 </head>
 <body>

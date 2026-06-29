@@ -1,177 +1,195 @@
 <p align="center">
-  English | <a href="README.zh.md">简体中文</a> | <a href="README.zht.md">繁體中文</a> | <a href="README.ko.md">한국어</a> | <a href="README.de.md">Deutsch</a> | <a href="README.es.md">Español</a> | <a href="README.fr.md">Français</a> | <a href="README.it.md">Italiano</a> | <a href="README.da.md">Dansk</a> | <a href="README.ja.md">日本語</a> | <a href="README.pl.md">Polski</a> | <a href="README.ru.md">Русский</a> | <a href="README.bs.md">Bosanski</a> | <a href="README.ar.md">العربية</a> | <a href="README.no.md">Norsk</a> | <a href="README.br.md">Português (Brasil)</a> | <a href="README.th.md">ไทย</a> | <a href="README.tr.md">Türkçe</a> | <a href="README.uk.md">Українська</a> | <a href="README.bn.md">বাংলা</a> | <a href="README.gr.md">Ελληνικά</a> | <a href="README.vi.md">Tiếng Việt</a>
+  简体中文 | <a href="README.en.md">English</a>
 </p>
 
 <p align="center">
-  <a href="https://kilo.ai"><img width="250" alt="Kilo Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
+  <strong>Kilo Code Better UI</strong><br>
+  基于 <a href="https://github.com/Kilo-Org/kilocode">Kilo-Org/kilocode</a> 的个人 Fork，专注于 VS Code 插件 UI 优化与自定义样式。
 </p>
-
-<p align="center">The open source coding agent for building with AI in VS Code, JetBrains, or the CLI.</p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
-  <a href="https://www.npmjs.com/package/@kilocode/cli"><img alt="npm" src="https://raster.shields.io/npm/v/@kilocode/cli?style=flat" height="20" /></a>
-  <a href="https://x.com/kilocode"><img src="https://raster.shields.io/badge/kilocode-000000?style=flat&logo=x&logoColor=white" alt="X (Twitter)" height="20"></a>
-  <a href="https://blog.kilo.ai"><img src="https://raster.shields.io/badge/Blog-555?style=flat&logo=substack&logoColor=white" alt="Blog" height="20"></a>
-  <a href="https://kilo.ai/discord"><img src="https://raster.shields.io/badge/Join%20Discord-5865F2?style=flat&logo=discord&logoColor=white" alt="Discord" height="20"></a>
-  <a href="https://www.reddit.com/r/kilocode/"><img src="https://raster.shields.io/badge/Join%20r%2Fkilocode-D84315?style=flat&logo=reddit&logoColor=white" alt="Reddit" height="20"></a>
+  <a href="https://github.com/XiaoXianThis/kilocode-better-ui/releases"><img src="https://raster.shields.io/github/v/release/XiaoXianThis/kilocode-better-ui?label=release" alt="GitHub Release" height="20"></a>
+  <a href="https://github.com/Kilo-Org/kilocode"><img src="https://raster.shields.io/badge/upstream-Kilo--Org%2Fkilocode-555?style=flat" alt="Upstream" height="20"></a>
 </p>
-
-![Kilo-in-VS-Code-and-CLI](https://github.com/user-attachments/assets/0536ca59-ed81-4512-9e05-d186187a1b52)
 
 ---
 
-Kilo Code is an AI coding agent that meets you everywhere you work: [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native), and the [CLI](https://kilo.ai/cli). It's open source with open pricing. You pick from 500+ models, switch between them mid-task, and pay the model provider's rate with zero markup. No API keys required to start.
+## 关于本 Fork
 
-### Installation
+本仓库 fork 自 [Kilo Code](https://github.com/Kilo-Org/kilocode) — 开源 AI 编程助手，支持 VS Code、JetBrains 与 CLI。**本 Fork 仅定制 VS Code 扩展部分**，CLI、JetBrains、文档等其余模块基本与上游保持一致。
 
-Pick where you want to run Kilo.
+| 项目 | 上游 | 本 Fork |
+|---|---|---|
+| 仓库 | [Kilo-Org/kilocode](https://github.com/Kilo-Org/kilocode) | [XiaoXianThis/kilocode-better-ui](https://github.com/XiaoXianThis/kilocode-better-ui) |
+| 扩展 ID | `kilocode.kilo-code` | `xiaoxianthis.kilocode-better-ui` |
+| 扩展名称 | Kilo Code | Kilo Code Better UI |
+| VSIX 文件名 | `kilo-vscode-*.vsix` | `kilocode-better-ui-*.vsix` |
+| 发布渠道 | VS Code 市场 + 上游 Release | 仅 [GitHub Releases](https://github.com/XiaoXianThis/kilocode-better-ui/releases) |
 
-<details open>
-<summary><strong>VS Code</strong></summary>
+**Fork 基准提交：** `0134fe1eeb`。当前扩展版本：**7.3.54**。
 
-<br>
+功能说明、模型配置、CLI 用法等请参考 [kilo.ai 文档](https://kilo.ai/docs) 与 [上游 README](https://github.com/Kilo-Org/kilocode/blob/main/README.md)。
 
-Install the [Kilo Code extension](vscode:extension/kilocode.kilo-code) directly, or grab it from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code). Create an account and you'll have access to 500+ models including GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6, and Gemini 3.1 Pro Preview, all at provider pricing.
+---
 
-</details>
+## Fork 特有功能
 
-<details open>
-<summary><strong>CLI</strong></summary>
+### 1. 自定义 CSS 注入
 
-<br>
+通过配置文件为 Kilo 侧边栏 Webview 注入自定义样式，可调整圆角、间距、隐藏元素等。
 
-```bash
-# npm
-npm install -g @kilocode/cli
+**设置项：** `kilo-code.new.customCssPath`
 
-# curl
-curl -fsSL https://kilo.ai/cli/install | bash
+- 支持绝对路径，或相对于**第一个工作区根目录**的相对路径
+- CSS 追加在 Webview 内联 `<style>` 末尾，优先级高于默认样式
+- 修改设置或保存 CSS 文件后会自动热重载，无需重启扩展
 
-# pnpm
-pnpm add -g @kilocode/cli
+示例（`settings.json`）：
 
-# bun
-bun add -g @kilocode/cli
-
-# Homebrew (macOS / Linux)
-brew install Kilo-Org/tap/kilo
-
-# Arch Linux (AUR)
-paru -S kilo-bin
+```json
+{
+  "kilo-code.new.customCssPath": ".kilo/custom.css"
+}
 ```
 
-Then run `kilo` in any project directory to start.
+示例（`.kilo/custom.css`）：
 
-</details>
+```css
+/* 圆角消息气泡 */
+[data-component="message"] {
+  border-radius: 12px;
+}
 
-<details>
-<summary><strong>JetBrains</strong></summary>
+/* 进一步隐藏标题栏区域 */
+[data-slot="sidebar-title-extra"] {
+  display: none;
+}
+```
 
-<br>
+### 2. 精简侧边栏标题栏
 
-Install the [Kilo Code plugin](https://plugins.jetbrains.com/plugin/28350-kilo-code) from the JetBrains Marketplace, or search "Kilo Code" in `Settings → Plugins` inside any JetBrains IDE.
+以下侧边栏标题栏按钮已隐藏（`when: "false"`），界面更简洁：
 
-</details>
+- Agent Manager（代理管理器）
+- KiloClaw
+- MCP Marketplace（市场）
+- Profile（个人资料）
 
-<details>
-<summary><strong>Cloud Agent</strong></summary>
+「设置」按钮保留。相关命令仍可通过命令面板调用。
 
-<br>
+### 3. 聊天自动滚动修复
 
-Run Kilo from the web, no local machine needed, at [app.kilo.ai/cloud](https://app.kilo.ai/cloud).
+Agent 流式输出时，在底部附近**缓慢向上滚轮**不再被强制拉回底部；在用户交互 grace 窗口内会尊重向上滚动意图。
 
-</details>
+### 4. 独立发布流水线
 
-<details>
-<summary><strong>Code Reviews</strong></summary>
+`.github/workflows/release-vscode.yml` 会自动构建多平台 VSIX 并发布到本仓库 GitHub Releases（标签格式：`vscode-v<版本号>`）。
 
-<br>
+---
 
-Set up automated AI code reviews on your pull requests at [app.kilo.ai/code-reviews](https://app.kilo.ai/code-reviews).
+## 安装
 
-</details>
+本 Fork **未**上架 VS Code 市场，请从 GitHub Releases 安装：
 
-<details>
-<summary><strong>KiloClaw</strong></summary>
+1. 打开 [Releases 页面](https://github.com/XiaoXianThis/kilocode-better-ui/releases)
+2. 下载对应平台的 VSIX，例如 `kilocode-better-ui-win32-x64.vsix`
+3. VS Code：`扩展` → `...` → `从 VSIX 安装...`
 
-<br>
+命令行安装：
 
-Spin up your always-on AI agent at [app.kilo.ai/claw](https://app.kilo.ai/claw).
+```bash
+code --install-extension path/to/kilocode-better-ui-win32-x64.vsix
+```
 
-</details>
+> **注意：** 发布者为 `xiaoxianthis`，扩展 ID 为 `kilocode-better-ui`。可与官方 Kilo Code 扩展共存，但日常使用建议只启用其中一个。
 
-<details>
-<summary>Install the CLI from GitHub Releases (binaries)</summary>
+---
 
-Download the latest binary from the [Releases page](https://github.com/Kilo-Org/kilocode/releases).
+## 从源码构建
 
-| Platform | Asset |
+```bash
+# 安装依赖（仓库根目录）
+bun install
+
+# 构建并打包进扩展的 CLI 二进制
+bun script/local-bin.ts --force
+
+# 构建所有平台 VSIX
+cd packages/kilo-vscode
+bun script/build.ts
+# 输出：packages/kilo-vscode/out/kilocode-better-ui-<platform>.vsix
+```
+
+本地开发：
+
+```bash
+bun run extension          # 仓库根目录 — 构建并在 VS Code 中加载扩展
+```
+
+类型检查（仅扩展，与 pre-push 钩子一致）：
+
+```bash
+bun run typecheck:vscode
+```
+
+---
+
+## 变更文件清单（相对上游）
+
+Fork 相对上游 `main` 仅有 **3 个提交**，**14 个文件**有差异：
+
+| 文件 | 变更说明 |
 |---|---|
-| Windows (most PCs) | `kilo-windows-x64.zip` |
-| macOS (Apple Silicon) | `kilo-darwin-arm64.zip` |
-| macOS (Intel) | `kilo-darwin-x64.zip` |
-| Linux x64 | `kilo-linux-x64.tar.gz` |
-| Linux ARM | `kilo-linux-arm64.tar.gz` |
+| `.github/workflows/release-vscode.yml` | **新增** — 构建 CLI + VSIX，发布 GitHub Release |
+| `.husky/pre-push` | pre-push 改为仅跑 `typecheck:vscode` |
+| `bun.lock` | 锁文件元数据微调（xlsx 条目） |
+| `package.json` | 新增 `typecheck:vscode` 脚本 |
+| `packages/kilo-ui/src/hooks/create-auto-scroll.tsx` | 修复底部慢速向上滚轮时被 snap 回底部 |
+| `packages/kilo-ui/src/hooks/create-auto-scroll.test.tsx` | 对应单元测试 |
+| `packages/kilo-ui/src/hooks/scroll-user-activity.ts` | 在 grace 窗口内记录向上滚轮意图 |
+| `packages/kilo-vscode/package.json` | 重命名扩展；隐藏侧边栏按钮；新增 `customCssPath` 设置 |
+| `packages/kilo-vscode/script/build.ts` | VSIX 输出名改为 `kilocode-better-ui-*.vsix` |
+| `packages/kilo-vscode/script/publish.ts` | 同上 |
+| `packages/kilo-vscode/src/KiloProvider.ts` | 接入自定义 CSS 监听与重载 |
+| `packages/kilo-vscode/src/kilo-provider/font-size.ts` | 新增 `watchCustomCssConfig()` |
+| `packages/kilo-vscode/src/utils.ts` | `getCustomCssPath()`、`readCustomCss()`、注入 Webview HTML |
+| `script/check-workflows.ts` | 将 `release-vscode.yml` 加入 workflow 白名单 |
 
-Notes: `x64-baseline` is a compatibility build for older CPUs without AVX. `musl` is the statically linked build for Alpine or minimal Docker images without glibc. `kilo-vscode-*.vsix` is the VS Code extension package, not the CLI. `Source code` archives are for building from source.
-
-</details>
-
-### Agents
-
-Kilo ships with specialized agents you switch between depending on the task. You can also build your own custom agents.
-
-- **Code** - The default. Implements and edits code from natural language.
-- **Plan** - Designs architecture and writes implementation plans before any code gets written.
-- **Ask** - Answers questions about your codebase without touching any files.
-- **Debug** - Troubleshoots and traces issues.
-- **Review** - Reviews your changes and surfaces issues across performance, security, style, and test coverage.
-
-Learn more about [agents and custom agents](https://kilo.ai/docs/code-with-ai/agents/using-agents).
-
-### What it does
-
-- **Code generation** from natural language, across multiple files.
-- **Inline autocomplete** with ghost-text suggestions and tab to accept.
-- **Self-checking** so the agent reviews and corrects its own work.
-- **Terminal and browser control** to run commands and automate the web.
-- **MCP marketplace** to find and wire up MCP servers that extend what the agent can do.
-- **500+ models** with mid-task switching, so you can match latency, cost, and reasoning to the job.
-
-### Autonomous Mode (CI/CD)
-
-Run `kilo run` with `--auto` for fully autonomous operation with no prompts, built for CI/CD pipelines:
-
-```bash
-kilo run --auto "run tests and fix any failures"
-```
-
-`--auto` disables all permission prompts and lets the agent execute any action without confirmation. Only use it in trusted environments.
-
-### Documentation
-
-For configuration and everything else, [head over to the docs](https://kilo.ai/docs).
-
-### Contributing
-
-Contributions are welcome from developers, writers, and everyone in between. Start with the [Contributing Guide](/CONTRIBUTING.md) for environment setup, coding standards, and how to open a pull request. See [RELEASING.md](RELEASING.md) for the VS Code extension and CLI release process, and [packages/kilo-jetbrains/RELEASING.md](packages/kilo-jetbrains/RELEASING.md) for the JetBrains plugin.
-
-Please review our [Code of Conduct](/CODE_OF_CONDUCT.md) before getting involved.
-
-### License
-
-MIT. You're free to use, modify, and distribute this code, including commercially, as long as you keep the attribution and license notices. See [License](/LICENSE).
-
-### FAQ
-
-<details>
-<summary>Where did Kilo CLI come from?</summary>
-
-Kilo CLI is a fork of [OpenCode](https://github.com/Kilo-Org/kilocode), enhanced to work within the Kilo agentic engineering platform.
-
-</details>
+**未改动：** CLI（`packages/opencode/`）、JetBrains 插件、SDK、网关、文档等在上游基准提交处与本 Fork 一致（合并新上游提交后可能变化）。
 
 ---
 
-**Join the community** [Discord](https://kilo.ai/discord) | [X](https://x.com/kilocode) | [Reddit](https://www.reddit.com/r/kilocode/)
+## 同步上游（维护说明）
+
+当你说 **「同步上游更新」** 时，应按以下流程操作：
+
+1. **拉取并合并** `https://github.com/Kilo-Org/kilocode` 的 `main` 分支
+2. **解决冲突** — 必须保留 Fork 特性：
+   - `kilo-code.new.customCssPath` 及 CSS 注入相关代码
+   - 侧边栏标题栏 `when: "false"` 隐藏逻辑
+   - `packages/kilo-ui/src/hooks/` 中的自动滚动修复
+   - 扩展重命名（`kilocode-better-ui`、发布者 `xiaoxianthis`）
+   - `release-vscode.yml` 与 VSIX 命名规则
+3. **更新本 README** — 基准提交、版本号、变更文件表（如有新增）
+4. **构建并发布** — 按需 bump `packages/kilo-vscode/package.json` 版本，打标签 `vscode-v<版本>` 推送以触发 Release，或手动运行 workflow
+
+快速命令：
+
+```bash
+git remote add upstream https://github.com/Kilo-Org/kilocode.git   # 首次
+git fetch upstream main
+git merge upstream/main
+# 解决冲突后：
+bun run typecheck:vscode
+cd packages/kilo-vscode && bun script/build.ts
+git tag vscode-v<版本>
+git push origin main --tags
+```
+
+---
+
+## 许可证
+
+与上游相同：**MIT**。见 [LICENSE](/LICENSE)。
+
+上游项目：[Kilo-Org/kilocode](https://github.com/Kilo-Org/kilocode) · [kilo.ai](https://kilo.ai)

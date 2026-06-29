@@ -46,6 +46,7 @@ const active = new Set([
   "prepare-jetbrains-release.yml",
   "publish-jetbrains.yml",
   "publish.yml",
+  "release-vscode.yml",
   "smoke-test.yml",
   "source-check-links.yml",
   "test-jetbrains.yml",

@@ -89,7 +89,7 @@ for (const config of targets) {
   await ensureFfmpegForTarget(config.target, binDir)
 
   console.log(`  📦 Packaging .vsix for ${config.target}${prerelease ? " (pre-release)" : ""}...`)
-  const vsixPath = join(outDir, `kilo-vscode-${config.target}.vsix`)
+  const vsixPath = join(outDir, `kilocode-better-ui-${config.target}.vsix`)
   const args = ["--no-dependencies", "--skip-license", "--target", config.target, "-o", vsixPath]
   if (prerelease) args.push("--pre-release")
   await $`vsce package ${args}`.env({

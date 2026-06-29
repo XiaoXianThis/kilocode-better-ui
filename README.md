@@ -44,15 +44,17 @@
 - CSS 追加在 Webview 内联 `<style>` 末尾，优先级高于默认样式
 - 修改设置或保存 CSS 文件后会自动热重载，无需重启扩展
 
-示例（`settings.json`）：
+本仓库附带 **Cursor 风格预设主题** [`themes/cursor.css`](themes/cursor.css)，可直接引用：
 
 ```json
 {
-  "kilo-code.new.customCssPath": ".kilo/custom.css"
+  "kilo-code.new.customCssPath": "themes/cursor.css"
 }
 ```
 
-示例（`.kilo/custom.css`）：
+路径相对于**第一个工作区根目录**。若本仓库即工作区根，上述配置即可生效；也可复制到 `.kilo/custom.css` 再按需修改。
+
+最小自定义示例：
 
 ```css
 /* 圆角消息气泡 */
@@ -136,13 +138,16 @@ bun run typecheck:vscode
 
 ## 变更文件清单（相对上游）
 
-Fork 相对上游 `main` 仅有 **3 个提交**，**14 个文件**有差异：
+Fork 相对上游基准提交 `0134fe1eeb` 共有 **8 个提交**。核心差异如下（不含将上游 workflow 移至 `.github/workflows/disabled/` 的重命名）：
 
 | 文件 | 变更说明 |
 |---|---|
 | `.github/workflows/release-vscode.yml` | **新增** — 构建 CLI + VSIX，发布 GitHub Release |
+| `.github/workflows/test-vscode.yml` | 保留 VS Code 扩展 CI |
 | `.husky/pre-push` | pre-push 改为仅跑 `typecheck:vscode` |
-| `bun.lock` | 锁文件元数据微调（xlsx 条目） |
+| `README.md` / `README.en.md` / `README.zh.md` | Fork 说明文档 |
+| `themes/cursor.css` | **新增** — Cursor 风格 UI 预设主题 |
+| `bun.lock` | 锁文件元数据微调 |
 | `package.json` | 新增 `typecheck:vscode` 脚本 |
 | `packages/kilo-ui/src/hooks/create-auto-scroll.tsx` | 修复底部慢速向上滚轮时被 snap 回底部 |
 | `packages/kilo-ui/src/hooks/create-auto-scroll.test.tsx` | 对应单元测试 |
@@ -153,6 +158,7 @@ Fork 相对上游 `main` 仅有 **3 个提交**，**14 个文件**有差异：
 | `packages/kilo-vscode/src/KiloProvider.ts` | 接入自定义 CSS 监听与重载 |
 | `packages/kilo-vscode/src/kilo-provider/font-size.ts` | 新增 `watchCustomCssConfig()` |
 | `packages/kilo-vscode/src/utils.ts` | `getCustomCssPath()`、`readCustomCss()`、注入 Webview HTML |
+| `packages/opencode/script/build.ts` | 构建脚本可执行权限（CI 兼容） |
 | `script/check-workflows.ts` | 将 `release-vscode.yml` 加入 workflow 白名单 |
 
 **未改动：** CLI（`packages/opencode/`）、JetBrains 插件、SDK、网关、文档等在上游基准提交处与本 Fork 一致（合并新上游提交后可能变化）。

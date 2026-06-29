@@ -1,0 +1,363 @@
+  /* 输入框 */
+  .prompt-input-container {
+    border-radius: 12px !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    border-width: 0.5px;
+    padding: 2px 4px;
+  }
+  /* 输入框 - 选中 */
+  .prompt-input-container:active {
+    /* border-color: #525252 !important; */
+    background-color: transparent;
+  }
+  
+  /* 整体缩小聊天区左右间距 */
+  .chat-view {
+    --chat-gutter: 8px !important;
+  }
+  
+  /* 让输入框真正占满，去掉右侧（及左右）多余留白 */
+  /* .chat-view .prompt-input-container,
+  .chat-view .new-task-button-wrapper,
+  .chat-view .chat-input > .startup-error-banner,
+  .chat-view .chat-input > [data-component="permission-shortcuts"] {
+    width: calc(100% - var(--chat-gutter) - var(--chat-gutter)) !important;
+    max-width: none !important;      
+    margin-inline: auto !important;
+  } */
+  
+  .kilo-about-text /*中间的介绍文字*/,
+  .feedback-button /*中间 BUG 反馈按钮*/,
+  .task-timeline, .task-timeline-outer, [data-slot="task-header-graph-row"]/*任务时间线*/ {
+      display: none;
+  }
+  
+  /* Token 统计 */
+  [data-component="task-header-graph"] {
+    padding: 0 !important;
+    background-color: var(--background-base);
+  }
+  .task-header-tokens {
+    padding: 0px 16px;
+    font-size: 9px !important;
+    line-height: 12px
+  }
+  
+  /* 聊天标题区域 */
+  [data-component="task-header"] {
+    padding: 1px 16px;
+    font-size: 12px !important;
+    border-bottom: 0 !important;
+    background-color: var(--background-base);
+    min-height: 0;
+  }
+  /* 聊天标题区域文字 */
+  [data-slot="task-header-title"] {
+    font-size: 12px !important;
+  }
+  
+  [data-slot="task-header-title-trigger"] {
+    padding: 0;
+  }
+  /*聊天框上各种按钮*/
+  .new-task-button-wrapper {
+    display: none;
+  }
+  /* 隐藏发送按钮左侧的操作图标 */
+  .prompt-input-hint-actions > :not(:last-child) {
+    display: none;
+  }
+  /* 发送/停止按钮（始终为 hint-actions 最后一个 tooltip） */
+  .prompt-input-hint-actions > [data-component="tooltip-trigger"]:last-child [data-component="button"] {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    border-radius: 100%;
+    color: #181818 !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    width: 22px;
+    height: 22px;
+    padding: 3px !important;
+  }
+  .prompt-input-hint-actions > [data-component="tooltip-trigger"]:last-child [data-component="button"] svg {
+    color: #181818 !important;
+    fill: #181818 !important;
+    width: 13px !important;
+    height: 13px !important;
+  }
+  .prompt-input-hint-actions > [data-component="tooltip-trigger"]:last-child [data-component="button"] svg:has(path) {
+    /* transform: translateX(-12px); */
+    transform: rotate(-90deg) translateX(1px) ;
+  }
+  .prompt-input-hint-actions > [data-component="tooltip-trigger"]:last-child [data-component="button"]:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+  }
+  
+  /*左侧按钮*/
+  .prompt-input-hint-selectors > [data-component="button"] {
+    gap: 1px !important;
+    padding: 1px 8px !important;
+    background-color: transparent;
+    border: none !important;
+  }
+  /* "数据可能用于训练"小图标 */
+  /* [data-component="tooltip-trigger"] {
+    display: none;
+  } */
+   /* 只隐藏模型选择器旁的「数据可能用于训练」图标 */
+  .model-selector-trigger-free-data,
+  .model-selector-free-data-icon {
+    display: none;
+  }
+
+  /*左侧 模式 选择按钮*/
+  .prompt-input-hint-selectors > [data-component="button"]:nth-child(1) {
+    border-radius: 11px !important;
+    gap: 1px !important;
+    padding: 0px 12px !important;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #999999;
+  }
+  /*左侧 模型 选择按钮*/
+  .prompt-input-hint-selectors > [data-component="button"]:nth-child(2) {
+    gap: 1px !important;
+    padding: 2px 4px !important;
+    margin-left: 4px;
+    background-color: transparent !important;
+    color: #a1a1a1;
+  }
+
+  
+  
+  /*按钮上的小图标*/
+  .prompt-input-hint-selectors > [data-component="button"] > svg {
+    margin-top: 3px;
+  }
+  
+  /* ====== 左侧弹窗（通用）====== */
+  [data-component="popover-content"] {
+    border: 0.5px #474747 solid;
+    border-radius: 8px;
+    background-color: #181818;
+    padding: 2px;
+    animation-duration: 0ms;
+  }
+  [data-slot="popover-body"] {
+    border: none;
+  }
+  /* 弹窗选项 */
+  [role="option"] {
+    border-radius: 6px;
+  }
+  [role="option"]:hover {
+    background-color: #262626;
+  }
+
+  /* 选中的 选项 */
+  .selected {
+    background-color: #2B2B2B !important;
+    outline: none !important;
+    border: none !important;
+    border-radius: 6px;
+  }
+
+  /* ========== 模式选择框 ========== */
+  /*模式列表*/
+  .mode-switcher-list {
+  }
+  /* 选项 */
+  .mode-switcher-item {
+    padding: 2px 12px;
+  }
+  /* 介绍的小字 */
+  .mode-switcher-item > .mode-switcher-item-desc {
+    display: none;
+  }
+  
+  
+  /* 输入文本框 */
+  .prompt-input {
+    min-height: 0px !important;
+    /* height: auto !important; */
+    padding: 8px 8px calc(8px + 0.4em); 
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* ========== 模型选择弹窗 ========== */
+  
+  /* 弹窗 */
+  .model-selector-popover {
+    width: auto !important;
+    max-width: 400px !important;
+  }
+  
+  /* 模型详情 */
+  .model-selector-preview {
+    display: none;
+  }
+  
+  
+  /* ========== 消息列表 ========== */
+
+
+  .message-list-content {
+    margin: 0px 15px !important;
+  }
+
+  .message-list-turns > div {
+    overflow-x: visible !important;
+  }
+
+  /*用户消息*/
+  [data-component="user-message"] > [data-slot="user-message-body"] > [data-slot="user-message-text"] {
+    min-width: auto !important;
+    border-radius: 12px;
+    background: #2e2e2e;
+    border: 1px solid #444444;
+    margin-top: 10px;
+  }
+  
+  /* AI 消息*/
+  /* [data-component="tool-part-wrapper"] {
+    padding: 0px 10px !important;
+  } */
+  /* 文字区域 */
+  [data-component="text-part"] {
+    padding: 4px 0px !important;
+  }
+  
+  /* 去掉思考、工具折叠区域的间隙 */
+  .vscode-session-turn {
+    padding-bottom: 0px !important;
+  }
+  .vscode-session-turn-assistant {
+    gap: 0px;
+  }
+
+  /* 思考区域 */
+  [data-slot="reasoning-content"] {
+    border-radius: 12px;
+    background: transparent !important;
+    opacity: 0.8;
+    padding: 0px 5px !important;
+  }
+  
+  [data-slot="reasoning-content"] [data-component="markdown"] {
+    font-style: normal !important;
+  }
+  
+  /* shell 区域 */
+  /* 整体 */
+  [data-component="bash-output"] {
+    border: 0.5px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+  }
+  /* 命令区 和 输出区 */
+  [data-slot=bash-terminal] {
+    background: none !important;
+  }
+  /* 命令区 */
+  [data-slot=bash-section][data-kind=command] {
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.1) !important;
+    font-size: 10px !important;
+  }
+  
+  /* 折叠区域 触发器 */
+  /* 触发器：自适应宽度，不占满一行 */
+  [data-slot="collapsible-trigger"] {
+    width: fit-content !important;
+    max-width: 100%;
+    margin-inline: 0 !important;
+    align-self: flex-start;
+    padding: 0 !important;
+  }
+  [data-slot="collapsible-trigger"]:hover {
+    background: none !important;
+  }
+
+  /* 折叠块左对齐，内容区仍可全宽 */
+  [data-component="collapsible"].tool-collapsible {
+    align-items: flex-start;
+  }
+
+  [data-component="reasoning-part"] {
+    width: 100%;
+  }
+
+  
+
+  /* 推理：标题不拉伸，箭头跟在文字后 */
+  [data-component="reasoning-part"] [data-slot="reasoning-header"] {
+    flex: 0 1 auto !important;
+  }
+
+  /* 工具：trigger 随内容收缩 */
+  [data-component="tool-trigger"] {
+    width: auto !important;
+    max-width: 100%;
+  }
+
+  [data-component="tool-trigger"] [data-slot="basic-tool-tool-trigger-content"] {
+    flex: 0 1 auto !important;
+    max-width: none !important;
+  }
+
+  /* 箭头紧贴文字 */
+  [data-slot="collapsible-arrow"] {
+    width: auto !important;
+    margin-left: 2px;
+    flex-shrink: 0;
+  }
+
+  /* 展开内容仍占满聊天宽度（可选，推荐保留） */
+  [data-component="collapsible"].tool-collapsible > [data-slot="collapsible-content"] {
+    width: 100% !important;
+    margin-inline: 0 !important;
+  }
+
+  /* 工具输出 */
+  [data-component="tool-output"] {
+    border-radius: 12px !important;
+    /* margin: 0 !important; */
+    padding: 8px 16px !important;
+    background-color: transparent !important;
+    border: 0.5px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  /* 工具外层 */
+  [data-slot="basic-tool-details"] {
+    margin-bottom: 8px;
+  }
+  
+
+  [data-component=tool-output][data-variant=preview]{
+    width: auto !important;
+  }
+
+  /* 复制、点赞、点踩 */
+  [data-slot="assistant-copy-wrapper"] {
+    display: none !important;
+  }
+  
+  /* 推理：隐藏大脑图标 */
+  [data-component="reasoning-part"] [data-slot="reasoning-header"] [data-component="icon"] {
+    display: none !important;
+  }
+
+  /* 工具调用：隐藏左侧工具图标（你已有，保留即可） */
+  [data-slot="basic-tool-icon"] {
+    display: none !important;
+  }
+
+  /* 可选：隐藏推理/工具右侧的折叠箭头 */
+  /* [data-component="reasoning-part"] [data-slot="collapsible-arrow"],
+  [data-component="tool-trigger"] [data-slot="collapsible-arrow"] {
+    display: none !important;
+  } */
+
+  /* 可选：隐藏 patch 类工具的文件图标 */
+  [data-slot="apply-patch-file-info"] [data-component="file-icon"] {
+    display: none !important;
+  }
+  

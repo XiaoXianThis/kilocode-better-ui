@@ -44,23 +44,25 @@ Inject your own stylesheet into the Kilo sidebar webview to tweak layout, spacin
 - CSS is appended last in the webview `<style>` block, so it overrides defaults
 - Changing the setting or saving the CSS file triggers a live reload (no extension restart)
 
-Example (`settings.json`):
+This repo ships a **Cursor-style preset theme** at [`themes/cursor.css`](themes/cursor.css):
 
 ```json
 {
-  "kilo-code.new.customCssPath": ".kilo/custom.css"
+  "kilo-code.new.customCssPath": "themes/cursor.css"
 }
 ```
 
-Example (`.kilo/custom.css`):
+The path is relative to the **first workspace folder**. If this repo is your workspace root, the setting above works as-is. You can also copy the file to `.kilo/custom.css` and tweak it.
+
+Minimal custom example:
 
 ```css
-/* Round message bubbles, tighten padding */
+/* Round message bubbles */
 [data-component="message"] {
   border-radius: 12px;
 }
 
-/* Hide sidebar title-bar shortcuts this fork already removes from the header */
+/* Hide extra sidebar title chrome */
 [data-slot="sidebar-title-extra"] {
   display: none;
 }
@@ -136,13 +138,16 @@ bun run typecheck:vscode
 
 ## Changed files (vs upstream)
 
-All fork diffs are in **3 commits** on top of upstream `main`. Only **14 files** differ:
+**8 commits** on top of upstream base `0134fe1eeb`. Core diffs below (excluding renames that move upstream workflows to `.github/workflows/disabled/`):
 
 | File | Change |
 |---|---|
 | `.github/workflows/release-vscode.yml` | **New** — build CLI + VSIX, publish GitHub Release |
+| `.github/workflows/test-vscode.yml` | Keep VS Code extension CI |
 | `.husky/pre-push` | Run `typecheck:vscode` instead of full monorepo typecheck |
-| `bun.lock` | Lockfile metadata tweak (xlsx entry) |
+| `README.md` / `README.en.md` / `README.zh.md` | Fork documentation |
+| `themes/cursor.css` | **New** — Cursor-style UI preset theme |
+| `bun.lock` | Lockfile metadata tweak |
 | `package.json` | Add `typecheck:vscode` script |
 | `packages/kilo-ui/src/hooks/create-auto-scroll.tsx` | Fix stick-to-bottom during slow wheel-up |
 | `packages/kilo-ui/src/hooks/create-auto-scroll.test.tsx` | Test for wheel-up near bottom band |
@@ -153,6 +158,7 @@ All fork diffs are in **3 commits** on top of upstream `main`. Only **14 files**
 | `packages/kilo-vscode/src/KiloProvider.ts` | Wire custom CSS watch + reload |
 | `packages/kilo-vscode/src/kilo-provider/font-size.ts` | Add `watchCustomCssConfig()` |
 | `packages/kilo-vscode/src/utils.ts` | `getCustomCssPath()`, `readCustomCss()`, inject into webview HTML |
+| `packages/opencode/script/build.ts` | Executable bit on build script (CI compatibility) |
 | `script/check-workflows.ts` | Register `release-vscode.yml` in allowlist |
 
 **Unchanged:** CLI (`packages/opencode/`), JetBrains plugin, SDK, gateway, docs, and all other packages match upstream at the fork base unless you merge newer upstream commits.

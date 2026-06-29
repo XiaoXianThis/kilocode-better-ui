@@ -54,7 +54,7 @@ jobs:
           echo "$RUNNER_TEMP/zig-linux-x86_64-0.14.0" >> "$GITHUB_PATH"
 
       - name: Build CLI
-        run: ./packages/opencode/script/build.ts
+        run: bun run --cwd packages/opencode build
         env:
           KILO_VERSION: ${{ steps.version.outputs.version }}
 

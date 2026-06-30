@@ -30,5 +30,8 @@ AGENTS.md
 # builds and may inject a dev-only bwrap fallback (see ServerManager.localCli).
 bin/.cli-version
 
+# Include bundled theme CSS
+!themes/**
+
 # Include WAV assets used by extension-host notification playback
 !audio-wav/**

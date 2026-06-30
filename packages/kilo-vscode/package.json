@@ -955,7 +955,7 @@
         "kilo-code.new.customCssPath": {
           "type": "string",
           "default": "",
-          "description": "Path to a CSS file injected into the Kilo Code webview UI to customize its appearance (border radius, spacing, hide elements, etc.). Use an absolute path or a path relative to the workspace root. Your CSS is appended last so it overrides the default styles. Leave empty to disable."
+          "description": "Path to a CSS file injected into the Kilo Code webview UI to customize its appearance (border radius, spacing, hide elements, etc.). Use an absolute path or a path relative to the workspace root. Your CSS is appended last so it overrides the default styles. Leave empty to use the built-in Cursor-style theme."
         },
         "kilo-code.new.browserAutomation.enabled": {
           "type": "boolean",

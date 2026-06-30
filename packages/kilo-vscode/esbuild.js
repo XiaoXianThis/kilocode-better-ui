@@ -1,6 +1,14 @@
 const esbuild = require("esbuild")
+const fs = require("fs")
 const path = require("path")
 const { solidPlugin } = require("esbuild-plugin-solid")
+
+const themeSrc = path.join(__dirname, "..", "..", "themes", "cursor.css")
+const themeDest = path.join(__dirname, "themes", "cursor.css")
+if (fs.existsSync(themeSrc)) {
+  fs.mkdirSync(path.dirname(themeDest), { recursive: true })
+  fs.copyFileSync(themeSrc, themeDest)
+}
 
 const production = process.argv.includes("--production")
 const watch = process.argv.includes("--watch")

@@ -235,6 +235,7 @@ export class DiffViewerProvider implements vscode.Disposable {
 
   private getHtml(webview: vscode.Webview): string {
     return buildWebviewHtml(webview, {
+      extensionUri: this.extensionUri,
       scriptUri: webview.asWebviewUri(vscode.Uri.joinPath(this.extensionUri, "dist", "diff-viewer.js")),
       styleUri: webview.asWebviewUri(vscode.Uri.joinPath(this.extensionUri, "dist", "diff-viewer.css")),
       iconsBaseUri: webview.asWebviewUri(vscode.Uri.joinPath(this.extensionUri, "assets", "icons")),

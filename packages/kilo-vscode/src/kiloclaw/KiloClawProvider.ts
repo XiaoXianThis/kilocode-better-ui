@@ -141,6 +141,7 @@ export class KiloClawProvider implements vscode.Disposable {
     }
 
     panel.webview.html = buildWebviewHtml(panel.webview, {
+      extensionUri: this.uri,
       scriptUri: panel.webview.asWebviewUri(vscode.Uri.joinPath(this.uri, "dist", "kiloclaw.js")),
       styleUri: panel.webview.asWebviewUri(vscode.Uri.joinPath(this.uri, "dist", "kiloclaw.css")),
       iconsBaseUri: panel.webview.asWebviewUri(vscode.Uri.joinPath(this.uri, "assets", "icons")),

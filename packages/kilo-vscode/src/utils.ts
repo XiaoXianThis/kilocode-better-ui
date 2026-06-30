@@ -20,20 +20,26 @@ export function getWebviewFontSize(): number {
   return clamp(raw)
 }
 
-// Resolve the configured custom CSS file path. Relative paths are resolved
-// against the first workspace folder so project-local stylesheets work.
-export function getCustomCssPath(): string | undefined {
-  const raw = vscode.workspace.getConfiguration("kilo-code.new").get<string>("customCssPath", "").trim()
-  if (!raw) return undefined
-  if (path.isAbsolute(raw)) return raw
-  const root = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath
-  return root ? path.join(root, raw) : undefined
+function customCssSetting() {
+  return vscode.workspace.getConfiguration("kilo-code.new").get<string>("customCssPath", "").trim()
 }
 
-// Read the user's custom stylesheet. Returns an empty string on any failure so
+// Resolve the CSS file to inject. Uses customCssPath when set; otherwise the
+// bundled cursor theme shipped with the extension.
+export function getCustomCssPath(extensionUri: vscode.Uri): string | undefined {
+  const raw = customCssSetting()
+  if (raw) {
+    if (path.isAbsolute(raw)) return raw
+    const root = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath
+    return root ? path.join(root, raw) : undefined
+  }
+  return vscode.Uri.joinPath(extensionUri, "themes", "cursor.css").fsPath
+}
+
+// Read the active webview stylesheet. Returns an empty string on any failure so
 // a missing or unreadable file never breaks the webview.
-export function readCustomCss(): string {
-  const file = getCustomCssPath()
+export function readCustomCss(extensionUri: vscode.Uri): string {
+  const file = getCustomCssPath(extensionUri)
   if (!file) return ""
   const css = (() => {
     try {
@@ -44,7 +50,8 @@ export function readCustomCss(): string {
     }
   })()
   if (!css.trim()) return ""
-  return `\n    /* kilo-code.new.customCssPath */\n    ${css}`
+  const label = customCssSetting() ? "kilo-code.new.customCssPath" : "kilo-code builtin theme (cursor.css)"
+  return `\n    /* ${label} */\n    ${css}`
 }
 
 function fontStyle(): string {
@@ -63,6 +70,7 @@ function fontStyle(): string {
 export function buildWebviewHtml(
   webview: vscode.Webview,
   opts: {
+    extensionUri: vscode.Uri
     scriptUri: vscode.Uri
     styleUri: vscode.Uri
     iconsBaseUri: vscode.Uri
@@ -106,7 +114,7 @@ export function buildWebviewHtml(
     }
     #root {
       height: 100%;
-    }${opts.extraStyles ? `\n    ${opts.extraStyles}` : ""}${readCustomCss()}
+    }${opts.extraStyles ? `\n    ${opts.extraStyles}` : ""}${readCustomCss(opts.extensionUri)}
   </style>
 </head>
 <body>

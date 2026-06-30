@@ -14,9 +14,9 @@ export function watchFontSizeConfig(
 
 // Watch the custom CSS setting and the referenced file, invoking `reload` so the
 // provider can rebuild its webview HTML (which re-reads and re-injects the CSS).
-export function watchCustomCssConfig(reload: () => void, next?: vscode.Disposable) {
+export function watchCustomCssConfig(reload: () => void, extensionUri: vscode.Uri, next?: vscode.Disposable) {
   const watch = (() => {
-    const file = getCustomCssPath()
+    const file = getCustomCssPath(extensionUri)
     if (!file) return undefined
     const fsw = vscode.workspace.createFileSystemWatcher(file)
     fsw.onDidChange(reload)

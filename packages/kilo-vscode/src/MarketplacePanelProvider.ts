@@ -327,6 +327,7 @@ export class MarketplacePanelProvider implements vscode.Disposable {
 
   private getHtml(webview: vscode.Webview): string {
     return buildWebviewHtml(webview, {
+      extensionUri: this.extensionUri,
       scriptUri: webview.asWebviewUri(vscode.Uri.joinPath(this.extensionUri, "dist", "marketplace.js")),
       styleUri: webview.asWebviewUri(vscode.Uri.joinPath(this.extensionUri, "dist", "marketplace.css")),
       iconsBaseUri: webview.asWebviewUri(vscode.Uri.joinPath(this.extensionUri, "assets", "icons")),

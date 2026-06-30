@@ -83,6 +83,7 @@ export class VscodeHost implements Host {
 
     const port = this.connectionService.getServerInfo()?.port
     panel.webview.html = buildWebviewHtml(panel.webview, {
+      extensionUri: this.extensionUri,
       scriptUri: panel.webview.asWebviewUri(vscode.Uri.joinPath(this.extensionUri, "dist", "agent-manager.js")),
       styleUri: panel.webview.asWebviewUri(vscode.Uri.joinPath(this.extensionUri, "dist", "agent-manager.css")),
       iconsBaseUri: panel.webview.asWebviewUri(vscode.Uri.joinPath(this.extensionUri, "assets", "icons")),

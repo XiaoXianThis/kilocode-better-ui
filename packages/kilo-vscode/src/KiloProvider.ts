@@ -1369,7 +1369,11 @@ export class KiloProvider implements vscode.WebviewViewProvider, TelemetryProper
     })
     this.webviewMessageDisposable = watchFontSizeConfig((msg) => this.postMessage(msg), this.webviewMessageDisposable)
     this.webviewMessageDisposable = watchWorkStyleConfig((msg) => this.postMessage(msg), this.webviewMessageDisposable)
-    this.webviewMessageDisposable = watchCustomCssConfig(() => this.reloadCustomCss(), this.webviewMessageDisposable)
+    this.webviewMessageDisposable = watchCustomCssConfig(
+      () => this.reloadCustomCss(),
+      this.extensionUri,
+      this.webviewMessageDisposable,
+    )
   }
 
   // Rebuild the webview HTML so the injected custom CSS is re-read from disk.
@@ -3852,6 +3856,7 @@ export class KiloProvider implements vscode.WebviewViewProvider, TelemetryProper
 
   private _getHtmlForWebview(webview: vscode.Webview): string {
     return buildWebviewHtml(webview, {
+      extensionUri: this.extensionUri,
       scriptUri: webview.asWebviewUri(vscode.Uri.joinPath(this.extensionUri, "dist", "webview.js")),
       styleUri: webview.asWebviewUri(vscode.Uri.joinPath(this.extensionUri, "dist", "webview.css")),
       iconsBaseUri: webview.asWebviewUri(vscode.Uri.joinPath(this.extensionUri, "assets", "icons")),

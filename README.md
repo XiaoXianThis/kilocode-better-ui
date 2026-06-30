@@ -34,25 +34,20 @@
 
 ## Fork 特有功能
 
-### 1. 自定义 CSS 注入
+### 1. 内置 Cursor 风格主题
 
-通过配置文件为 Kilo 侧边栏 Webview 注入自定义样式，可调整圆角、间距、隐藏元素等。
+扩展**默认**注入 Cursor 风格 UI 样式，安装即用，**无需任何配置**。
 
-**设置项：** `kilo-code.new.customCssPath`
+主题文件位于 [`packages/kilo-vscode/themes/cursor.css`](packages/kilo-vscode/themes/cursor.css)，会随 VSIX 一起打包。本地开发时，`esbuild.js` 会在编译前尝试从仓库根目录 `themes/cursor.css` 同步（若存在），便于在 monorepo 根目录维护一份源文件。
+
+### 2. 自定义 CSS 覆盖（可选）
+
+如需覆盖内置主题，可通过 `kilo-code.new.customCssPath` 指定自己的 CSS 文件：
 
 - 支持绝对路径，或相对于**第一个工作区根目录**的相对路径
-- CSS 追加在 Webview 内联 `<style>` 末尾，优先级高于默认样式
+- CSS 追加在 Webview 内联 `<style>` 末尾，优先级高于内置主题
 - 修改设置或保存 CSS 文件后会自动热重载，无需重启扩展
-
-本仓库附带 **Cursor 风格预设主题** [`themes/cursor.css`](themes/cursor.css)，可直接引用：
-
-```json
-{
-  "kilo-code.new.customCssPath": "themes/cursor.css"
-}
-```
-
-路径相对于**第一个工作区根目录**。若本仓库即工作区根，上述配置即可生效；也可复制到 `.kilo/custom.css` 再按需修改。
+- **留空**则继续使用内置 Cursor 主题
 
 最小自定义示例：
 
@@ -68,7 +63,7 @@
 }
 ```
 
-### 2. 精简侧边栏标题栏
+### 3. 精简侧边栏标题栏
 
 以下侧边栏标题栏按钮已隐藏（`when: "false"`），界面更简洁：
 
@@ -79,11 +74,11 @@
 
 「设置」按钮保留。相关命令仍可通过命令面板调用。
 
-### 3. 聊天自动滚动修复
+### 4. 聊天自动滚动修复
 
 Agent 流式输出时，在底部附近**缓慢向上滚轮**不再被强制拉回底部；在用户交互 grace 窗口内会尊重向上滚动意图。
 
-### 4. 独立发布流水线
+### 5. 独立发布流水线
 
 `.github/workflows/release-vscode.yml` 会自动构建多平台 VSIX 并发布到本仓库 GitHub Releases（标签格式：`vscode-v<版本号>`）。
 
@@ -138,7 +133,7 @@ bun run typecheck:vscode
 
 ## 变更文件清单（相对上游）
 
-Fork 相对上游基准提交 `0134fe1eeb` 共有 **8 个提交**。核心差异如下（不含将上游 workflow 移至 `.github/workflows/disabled/` 的重命名）：
+Fork 相对上游基准提交 `0134fe1eeb` 共有 **9 个提交**。核心差异如下（不含将上游 workflow 移至 `.github/workflows/disabled/` 的重命名）：
 
 | 文件 | 变更说明 |
 |---|---|
@@ -146,18 +141,20 @@ Fork 相对上游基准提交 `0134fe1eeb` 共有 **8 个提交**。核心差异
 | `.github/workflows/test-vscode.yml` | 保留 VS Code 扩展 CI |
 | `.husky/pre-push` | pre-push 改为仅跑 `typecheck:vscode` |
 | `README.md` / `README.en.md` / `README.zh.md` | Fork 说明文档 |
-| `themes/cursor.css` | **新增** — Cursor 风格 UI 预设主题 |
+| `packages/kilo-vscode/themes/cursor.css` | **新增** — 内置 Cursor 风格 UI 主题（默认启用） |
+| `packages/kilo-vscode/.vscodeignore` | 打包时包含 `themes/**` |
+| `packages/kilo-vscode/esbuild.js` | 编译前同步根目录 `themes/cursor.css`（若存在） |
 | `bun.lock` | 锁文件元数据微调 |
 | `package.json` | 新增 `typecheck:vscode` 脚本 |
 | `packages/kilo-ui/src/hooks/create-auto-scroll.tsx` | 修复底部慢速向上滚轮时被 snap 回底部 |
 | `packages/kilo-ui/src/hooks/create-auto-scroll.test.tsx` | 对应单元测试 |
 | `packages/kilo-ui/src/hooks/scroll-user-activity.ts` | 在 grace 窗口内记录向上滚轮意图 |
-| `packages/kilo-vscode/package.json` | 重命名扩展；隐藏侧边栏按钮；新增 `customCssPath` 设置 |
+| `packages/kilo-vscode/package.json` | 重命名扩展；隐藏侧边栏按钮；`customCssPath` 留空时使用内置主题 |
 | `packages/kilo-vscode/script/build.ts` | VSIX 输出名改为 `kilocode-better-ui-*.vsix` |
 | `packages/kilo-vscode/script/publish.ts` | 同上 |
 | `packages/kilo-vscode/src/KiloProvider.ts` | 接入自定义 CSS 监听与重载 |
 | `packages/kilo-vscode/src/kilo-provider/font-size.ts` | 新增 `watchCustomCssConfig()` |
-| `packages/kilo-vscode/src/utils.ts` | `getCustomCssPath()`、`readCustomCss()`、注入 Webview HTML |
+| `packages/kilo-vscode/src/utils.ts` | 内置主题 + `customCssPath` 覆盖，注入 Webview HTML |
 | `packages/opencode/script/build.ts` | 构建脚本可执行权限（CI 兼容） |
 | `script/check-workflows.ts` | 将 `release-vscode.yml` 加入 workflow 白名单 |
 
@@ -171,7 +168,7 @@ Fork 相对上游基准提交 `0134fe1eeb` 共有 **8 个提交**。核心差异
 
 1. **拉取并合并** `https://github.com/Kilo-Org/kilocode` 的 `main` 分支
 2. **解决冲突** — 必须保留 Fork 特性：
-   - `kilo-code.new.customCssPath` 及 CSS 注入相关代码
+   - 内置 Cursor 主题（`packages/kilo-vscode/themes/cursor.css`）及 `customCssPath` 覆盖逻辑
    - 侧边栏标题栏 `when: "false"` 隐藏逻辑
    - `packages/kilo-ui/src/hooks/` 中的自动滚动修复
    - 扩展重命名（`kilocode-better-ui`、发布者 `xiaoxianthis`）

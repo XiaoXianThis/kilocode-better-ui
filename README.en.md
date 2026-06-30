@@ -34,25 +34,20 @@ Upstream docs, agents, CLI usage, and model/provider setup still apply — see [
 
 ## Fork-specific features
 
-### 1. Custom CSS injection
+### 1. Built-in Cursor-style theme
 
-Inject your own stylesheet into the Kilo sidebar webview to tweak layout, spacing, border radius, or hide UI elements.
+The extension **ships with** a Cursor-style UI theme enabled **by default** — install and use, no configuration required.
 
-**Setting:** `kilo-code.new.customCssPath`
+Theme source: [`packages/kilo-vscode/themes/cursor.css`](packages/kilo-vscode/themes/cursor.css), bundled into the VSIX. During local dev, `esbuild.js` optionally syncs from repo-root `themes/cursor.css` before compile if that file exists.
+
+### 2. Custom CSS override (optional)
+
+To override the built-in theme, set `kilo-code.new.customCssPath` to your own stylesheet:
 
 - Absolute path, or path relative to the **first workspace folder**
-- CSS is appended last in the webview `<style>` block, so it overrides defaults
+- CSS is appended last in the webview `<style>` block, so it overrides the built-in theme
 - Changing the setting or saving the CSS file triggers a live reload (no extension restart)
-
-This repo ships a **Cursor-style preset theme** at [`themes/cursor.css`](themes/cursor.css):
-
-```json
-{
-  "kilo-code.new.customCssPath": "themes/cursor.css"
-}
-```
-
-The path is relative to the **first workspace folder**. If this repo is your workspace root, the setting above works as-is. You can also copy the file to `.kilo/custom.css` and tweak it.
+- **Leave empty** to keep the built-in Cursor theme
 
 Minimal custom example:
 
@@ -68,7 +63,7 @@ Minimal custom example:
 }
 ```
 
-### 2. Simplified sidebar header
+### 3. Simplified sidebar header
 
 These sidebar title-bar actions are hidden (`when: "false"`) for a cleaner header:
 
@@ -79,11 +74,11 @@ These sidebar title-bar actions are hidden (`when: "false"`) for a cleaner heade
 
 Settings remains available. Commands still exist — bind them via the Command Palette if needed.
 
-### 3. Chat auto-scroll fix
+### 4. Chat auto-scroll fix
 
 While the agent is streaming, a **slow wheel-up** near the bottom no longer snaps the view back to the bottom. Upward wheel intent is respected during the user-interaction grace window.
 
-### 4. Independent release pipeline
+### 5. Independent release pipeline
 
 GitHub Actions workflow `.github/workflows/release-vscode.yml` builds multi-platform VSIX packages and publishes them to this repo's Releases (tag format: `vscode-v<version>`).
 
@@ -138,7 +133,7 @@ bun run typecheck:vscode
 
 ## Changed files (vs upstream)
 
-**8 commits** on top of upstream base `0134fe1eeb`. Core diffs below (excluding renames that move upstream workflows to `.github/workflows/disabled/`):
+**9 commits** on top of upstream base `0134fe1eeb`. Core diffs below (excluding renames that move upstream workflows to `.github/workflows/disabled/`):
 
 | File | Change |
 |---|---|
@@ -146,18 +141,20 @@ bun run typecheck:vscode
 | `.github/workflows/test-vscode.yml` | Keep VS Code extension CI |
 | `.husky/pre-push` | Run `typecheck:vscode` instead of full monorepo typecheck |
 | `README.md` / `README.en.md` / `README.zh.md` | Fork documentation |
-| `themes/cursor.css` | **New** — Cursor-style UI preset theme |
+| `packages/kilo-vscode/themes/cursor.css` | **New** — built-in Cursor-style UI theme (enabled by default) |
+| `packages/kilo-vscode/.vscodeignore` | Include `themes/**` in VSIX |
+| `packages/kilo-vscode/esbuild.js` | Sync repo-root `themes/cursor.css` before compile when present |
 | `bun.lock` | Lockfile metadata tweak |
 | `package.json` | Add `typecheck:vscode` script |
 | `packages/kilo-ui/src/hooks/create-auto-scroll.tsx` | Fix stick-to-bottom during slow wheel-up |
 | `packages/kilo-ui/src/hooks/create-auto-scroll.test.tsx` | Test for wheel-up near bottom band |
 | `packages/kilo-ui/src/hooks/scroll-user-activity.ts` | Record upward-wheel intent in grace window |
-| `packages/kilo-vscode/package.json` | Rebrand (name, publisher, repo); hide sidebar buttons; add `customCssPath` setting |
+| `packages/kilo-vscode/package.json` | Rebrand; hide sidebar buttons; empty `customCssPath` uses built-in theme |
 | `packages/kilo-vscode/script/build.ts` | VSIX output name → `kilocode-better-ui-*.vsix` |
 | `packages/kilo-vscode/script/publish.ts` | Same VSIX naming |
 | `packages/kilo-vscode/src/KiloProvider.ts` | Wire custom CSS watch + reload |
 | `packages/kilo-vscode/src/kilo-provider/font-size.ts` | Add `watchCustomCssConfig()` |
-| `packages/kilo-vscode/src/utils.ts` | `getCustomCssPath()`, `readCustomCss()`, inject into webview HTML |
+| `packages/kilo-vscode/src/utils.ts` | Built-in theme + optional `customCssPath` override in webview HTML |
 | `packages/opencode/script/build.ts` | Executable bit on build script (CI compatibility) |
 | `script/check-workflows.ts` | Register `release-vscode.yml` in allowlist |
 
@@ -171,7 +168,7 @@ When you say **「同步上游更新」**, the expected workflow is:
 
 1. **Fetch & merge** `https://github.com/Kilo-Org/kilocode` `main` into this fork
 2. **Resolve conflicts** — always keep fork features:
-   - `kilo-code.new.customCssPath` and CSS injection code
+   - Built-in Cursor theme (`packages/kilo-vscode/themes/cursor.css`) and `customCssPath` override logic
    - Sidebar header `when: "false"` overrides
    - Auto-scroll fixes in `packages/kilo-ui/src/hooks/`
    - Extension rebrand (`kilocode-better-ui`, publisher `xiaoxianthis`)
